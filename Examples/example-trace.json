@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "caliper.telemetry.v1",
+  "generatedAt": "2026-05-24T10:00:00Z",
+  "snapshot": {
+    "points": [
+      {
+        "id": "11111111-1111-1111-1111-111111111111",
+        "name": "llm.inference.ttft",
+        "value": 0.184,
+        "unit": "s",
+        "timestamp": "2026-05-24T10:00:01Z",
+        "attributes": {
+          "request.id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        }
+      },
+      {
+        "id": "22222222-2222-2222-2222-222222222222",
+        "name": "llm.tokens.per_second",
+        "value": 21.8,
+        "unit": "tokens/s",
+        "timestamp": "2026-05-24T10:00:02Z",
+        "attributes": {
+          "request.id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        }
+      }
+    ],
+    "spans": [
+      {
+        "id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        "name": "inference",
+        "start": "2026-05-24T10:00:00Z",
+        "end": "2026-05-24T10:00:03Z",
+        "attributes": {
+          "llm.output.tokens": "64",
+          "llm.finish_reason": "completed"
+        },
+        "events": [
+          "token.0",
+          "token.1"
+        ]
+      }
+    ],
+    "updatedAt": "2026-05-24T10:00:03Z"
+  }
+}
