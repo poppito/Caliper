@@ -1,0 +1,21 @@
+.DS_Store
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Xcode / SwiftUI
+DerivedData/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.hmap
+
+# Playgrounds and previews
+timeline.xctimeline
+playground.xcworkspace
+*.playground/xcuserdata/
