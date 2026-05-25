@@ -1,3 +1,11 @@
+//
+//  SampleCaliperAppApp.swift
+//  SampleCaliperApp
+//
+//  Created by Harsh Overseer on 25/5/2026.
+//
+
+import SwiftUI
 import CaliperCore
 import Dashboards
 import RuntimeAdapters
@@ -6,7 +14,7 @@ import Telemetry
 import Workloads
 
 @main
-struct SampleApp: App {
+struct SampleCaliperAppApp: App {
     var body: some Scene {
         WindowGroup {
             SampleContentView()
