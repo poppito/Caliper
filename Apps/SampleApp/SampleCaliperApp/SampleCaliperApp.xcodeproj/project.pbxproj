@@ -6,6 +6,17 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		136BB3C82FC47AC200078068 /* Caliper in Frameworks */ = {isa = PBXBuildFile; productRef = 136BB3C72FC47AC200078068 /* Caliper */; };
+		136BB3CA2FC47AC200078068 /* CaliperCore in Frameworks */ = {isa = PBXBuildFile; productRef = 136BB3C92FC47AC200078068 /* CaliperCore */; };
+		136BB3CC2FC47AC200078068 /* CaliperDashboards in Frameworks */ = {isa = PBXBuildFile; productRef = 136BB3CB2FC47AC200078068 /* CaliperDashboards */; };
+		136BB3CE2FC47AC200078068 /* CaliperExporters in Frameworks */ = {isa = PBXBuildFile; productRef = 136BB3CD2FC47AC200078068 /* CaliperExporters */; };
+		136BB3D02FC47AC200078068 /* CaliperRuntimeAdapters in Frameworks */ = {isa = PBXBuildFile; productRef = 136BB3CF2FC47AC200078068 /* CaliperRuntimeAdapters */; };
+		136BB3D22FC47AC200078068 /* CaliperTelemetry in Frameworks */ = {isa = PBXBuildFile; productRef = 136BB3D12FC47AC200078068 /* CaliperTelemetry */; };
+		136BB3D42FC47AC200078068 /* CaliperValidators in Frameworks */ = {isa = PBXBuildFile; productRef = 136BB3D32FC47AC200078068 /* CaliperValidators */; };
+		136BB3D62FC47AC200078068 /* CaliperWorkloads in Frameworks */ = {isa = PBXBuildFile; productRef = 136BB3D52FC47AC200078068 /* CaliperWorkloads */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		136BB3A22FC4750A00078068 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +38,10 @@
 		136BB3942FC4750900078068 /* SampleCaliperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCaliperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		136BB3A12FC4750A00078068 /* SampleCaliperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleCaliperAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		136BB3AB2FC4750A00078068 /* SampleCaliperAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleCaliperAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		136BB3BE2FC4796700078068 /* CaliperSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaliperSession.swift; sourceTree = "<group>"; };
+		136BB3BF2FC4796700078068 /* InferenceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceModels.swift; sourceTree = "<group>"; };
+		136BB3C02FC4796700078068 /* InferenceRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceRuntime.swift; sourceTree = "<group>"; };
+		136BB3C12FC4796700078068 /* TelemetryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEvent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +67,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				136BB3CE2FC47AC200078068 /* CaliperExporters in Frameworks */,
+				136BB3CC2FC47AC200078068 /* CaliperDashboards in Frameworks */,
+				136BB3D02FC47AC200078068 /* CaliperRuntimeAdapters in Frameworks */,
+				136BB3D22FC47AC200078068 /* CaliperTelemetry in Frameworks */,
+				136BB3D42FC47AC200078068 /* CaliperValidators in Frameworks */,
+				136BB3CA2FC47AC200078068 /* CaliperCore in Frameworks */,
+				136BB3D62FC47AC200078068 /* CaliperWorkloads in Frameworks */,
+				136BB3C82FC47AC200078068 /* Caliper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +98,7 @@
 		136BB38B2FC4750900078068 = {
 			isa = PBXGroup;
 			children = (
+				136BB3C42FC4796700078068 /* CaliperCore */,
 				136BB3962FC4750900078068 /* SampleCaliperApp */,
 				136BB3A42FC4750A00078068 /* SampleCaliperAppTests */,
 				136BB3AE2FC4750A00078068 /* SampleCaliperAppUITests */,
@@ -90,6 +114,34 @@
 				136BB3AB2FC4750A00078068 /* SampleCaliperAppUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		136BB3C22FC4796700078068 /* CaliperCore */ = {
+			isa = PBXGroup;
+			children = (
+				136BB3BE2FC4796700078068 /* CaliperSession.swift */,
+				136BB3BF2FC4796700078068 /* InferenceModels.swift */,
+				136BB3C02FC4796700078068 /* InferenceRuntime.swift */,
+				136BB3C12FC4796700078068 /* TelemetryEvent.swift */,
+			);
+			path = CaliperCore;
+			sourceTree = "<group>";
+		};
+		136BB3C32FC4796700078068 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				136BB3C22FC4796700078068 /* CaliperCore */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		136BB3C42FC4796700078068 /* CaliperCore */ = {
+			isa = PBXGroup;
+			children = (
+				136BB3C32FC4796700078068 /* Sources */,
+			);
+			name = CaliperCore;
+			path = ../../../Packages/CaliperCore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +164,14 @@
 			);
 			name = SampleCaliperApp;
 			packageProductDependencies = (
+				136BB3C72FC47AC200078068 /* Caliper */,
+				136BB3C92FC47AC200078068 /* CaliperCore */,
+				136BB3CB2FC47AC200078068 /* CaliperDashboards */,
+				136BB3CD2FC47AC200078068 /* CaliperExporters */,
+				136BB3CF2FC47AC200078068 /* CaliperRuntimeAdapters */,
+				136BB3D12FC47AC200078068 /* CaliperTelemetry */,
+				136BB3D32FC47AC200078068 /* CaliperValidators */,
+				136BB3D52FC47AC200078068 /* CaliperWorkloads */,
 			);
 			productName = SampleCaliperApp;
 			productReference = 136BB3942FC4750900078068 /* SampleCaliperApp.app */;
@@ -195,6 +255,9 @@
 			);
 			mainGroup = 136BB38B2FC4750900078068;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				136BB3C62FC47AC200078068 /* XCLocalSwiftPackageReference "../../../../Caliper" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 136BB3952FC4750900078068 /* Products */;
 			projectDirPath = "";
@@ -615,6 +678,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		136BB3C62FC47AC200078068 /* XCLocalSwiftPackageReference "../../../../Caliper" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../../Caliper;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		136BB3C72FC47AC200078068 /* Caliper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Caliper;
+		};
+		136BB3C92FC47AC200078068 /* CaliperCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CaliperCore;
+		};
+		136BB3CB2FC47AC200078068 /* CaliperDashboards */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CaliperDashboards;
+		};
+		136BB3CD2FC47AC200078068 /* CaliperExporters */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CaliperExporters;
+		};
+		136BB3CF2FC47AC200078068 /* CaliperRuntimeAdapters */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CaliperRuntimeAdapters;
+		};
+		136BB3D12FC47AC200078068 /* CaliperTelemetry */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CaliperTelemetry;
+		};
+		136BB3D32FC47AC200078068 /* CaliperValidators */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CaliperValidators;
+		};
+		136BB3D52FC47AC200078068 /* CaliperWorkloads */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CaliperWorkloads;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 136BB38C2FC4750900078068 /* Project object */;
 }

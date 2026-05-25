@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import Combine
 import CaliperCore
 import Dashboards
 import RuntimeAdapters
-import SwiftUI
 import Telemetry
 import Workloads
 
@@ -63,9 +63,9 @@ final class SampleViewModel: ObservableObject {
         let session = CaliperSession(runtime: runtime)
         self.runner = WorkloadRunner(session: session, collector: collector)
         Task {
-            for await snapshot in await collector.snapshots {
+            for await latest in await collector.snapshots {
                 await MainActor.run {
-                    self.snapshot = snapshot
+                    self.snapshot = latest
                 }
             }
         }
