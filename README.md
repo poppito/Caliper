@@ -64,7 +64,7 @@ It also includes `NativeLlamaCppRuntime` and `RuntimeFactory`, which automatical
 Add the package to an iOS 16+ app:
 
 ```swift
-.package(url: "https://github.com/your-org/caliper.git", from: "0.1.0")
+.package(url: "https://github.com/poppito/caliper.git", from: "0.1.0")
 ```
 
 Create a session:
