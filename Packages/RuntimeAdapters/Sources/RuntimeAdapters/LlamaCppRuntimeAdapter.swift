@@ -2,7 +2,7 @@ import CaliperCore
 import Foundation
 
 public actor LlamaCppRuntimeAdapter: InferenceRuntime {
-    public let runtimeName = "llama.cpp"
+    public nonisolated let runtimeName = "llama.cpp"
     private var metadata: ModelMetadata?
     private let tokenProvider: @Sendable (InferenceRequest) async throws -> [String]
 
@@ -59,7 +59,7 @@ public actor LlamaCppRuntimeAdapter: InferenceRuntime {
 }
 
 public actor SimulatedLlamaRuntime: InferenceRuntime {
-    public let runtimeName = "llama.cpp.simulated"
+    public nonisolated let runtimeName = "llama.cpp.simulated"
     private let metadataValue: ModelMetadata
 
     public var modelMetadata: ModelMetadata? {
@@ -67,7 +67,7 @@ public actor SimulatedLlamaRuntime: InferenceRuntime {
     }
 
     public init(
-        modelIdentifier: String = "TinyLlama-1.1B-Chat-v1.0.Q4_0.gguf",
+        modelIdentifier: String = "model.gguf",
         quantization: String = "Q4_0"
     ) {
         self.metadataValue = ModelMetadata(

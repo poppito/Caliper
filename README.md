@@ -47,6 +47,7 @@ Caliper/
 `CaliperCore` defines inference runtime protocols, lifecycle events, telemetry models, spans, and the `CaliperSession` orchestrator.
 
 `RuntimeAdapters` contains the llama.cpp adapter boundary and a simulated llama runtime for samples and tests.
+It also includes `NativeLlamaCppRuntime` and `RuntimeFactory`, which automatically use a bundled GGUF when `llama.xcframework` is present.
 
 `Telemetry` contains the probe system and built-in probes for latency, TTFT, token throughput, memory, thermal state, battery state, and signposts.
 
@@ -104,6 +105,7 @@ CaliperDashboardView(snapshot: snapshot)
 ## llama.cpp Integration
 
 v1 starts with llama.cpp as the intended runtime. The package does not bundle llama.cpp or model binaries. Host apps should provide a concrete token provider or extend `LlamaCppRuntimeAdapter` with their own C/Swift bridge.
+For an actual device test, add `llama.xcframework`, bundle a `.gguf` model named `TinyLlama-1.1B-Chat-v1.0.Q4_0.gguf` or update `RuntimeFactory`, and let the sample app use `NativeLlamaCppRuntime`.
 
 The adapter emits:
 

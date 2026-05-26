@@ -81,3 +81,7 @@ xcuserdata/
 timeline.xctimeline
 playground.xcworkspace
 *.playground/xcuserdata/
+
+# Large local AI assets
+*.gguf
+llama.xcframework/

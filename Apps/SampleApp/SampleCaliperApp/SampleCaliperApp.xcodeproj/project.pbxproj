@@ -34,6 +34,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		136BB3EC2FC5B7FC00078068 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		136BB3942FC4750900078068 /* SampleCaliperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCaliperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		136BB3A12FC4750A00078068 /* SampleCaliperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleCaliperAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,11 +55,28 @@
 		136BB3BF2FC4796700078068 /* InferenceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceModels.swift; sourceTree = "<group>"; };
 		136BB3C02FC4796700078068 /* InferenceRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InferenceRuntime.swift; sourceTree = "<group>"; };
 		136BB3C12FC4796700078068 /* TelemetryEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEvent.swift; sourceTree = "<group>"; };
+		136CA6012FC5C5AD0037DFC9 /* tinyllama-1.1b-chat-v1.0.Q2_K.gguf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "tinyllama-1.1b-chat-v1.0.Q2_K.gguf"; path = "SampleCaliperApp/tinyllama-1.1b-chat-v1.0.Q2_K.gguf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		136BB3ED2FC5B7FC00078068 /* Exceptions for "SampleCaliperApp" folder in "Embed Frameworks" phase from "SampleCaliperApp" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			attributesByRelativePath = {
+				llama.xcframework = (CodeSignOnCopy, RemoveHeadersOnCopy, );
+			};
+			buildPhase = 136BB3EC2FC5B7FC00078068 /* Embed Frameworks */;
+			membershipExceptions = (
+				llama.xcframework,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		136BB3962FC4750900078068 /* SampleCaliperApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				136BB3ED2FC5B7FC00078068 /* Exceptions for "SampleCaliperApp" folder in "Embed Frameworks" phase from "SampleCaliperApp" target */,
+			);
 			path = SampleCaliperApp;
 			sourceTree = "<group>";
 		};
@@ -98,6 +128,7 @@
 		136BB38B2FC4750900078068 = {
 			isa = PBXGroup;
 			children = (
+				136CA6012FC5C5AD0037DFC9 /* tinyllama-1.1b-chat-v1.0.Q2_K.gguf */,
 				136BB3C42FC4796700078068 /* CaliperCore */,
 				136BB3962FC4750900078068 /* SampleCaliperApp */,
 				136BB3A42FC4750A00078068 /* SampleCaliperAppTests */,
@@ -154,6 +185,7 @@
 				136BB3902FC4750900078068 /* Sources */,
 				136BB3912FC4750900078068 /* Frameworks */,
 				136BB3922FC4750900078068 /* Resources */,
+				136BB3EC2FC5B7FC00078068 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

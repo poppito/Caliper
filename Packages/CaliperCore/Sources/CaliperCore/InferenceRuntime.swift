@@ -4,7 +4,7 @@ public protocol InferenceRuntime: Sendable {
     var runtimeName: String { get }
     var modelMetadata: ModelMetadata? { get async }
 
-    func loadModel() async throws -> ModelMetadata
+func loadModel() async throws -> ModelMetadata
     func run(_ request: InferenceRequest) async throws -> AsyncThrowingStream<TokenEvent, Error>
 }
 

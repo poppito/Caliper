@@ -8,6 +8,12 @@ Host apps can integrate by:
 2. Bridging llama.cpp token streaming into a Swift async sequence.
 3. Passing token strings through `LlamaCppRuntimeAdapter`.
 
+For direct model testing in the sample app, `RuntimeFactory` will pick `NativeLlamaCppRuntime` automatically when:
+
+- `llama.xcframework` is linked into the app target
+- the model file exists in the app bundle
+- the build can import the `llama` module
+
 The adapter records operational behavior, not benchmark scores.
 
 Recommended model metadata:

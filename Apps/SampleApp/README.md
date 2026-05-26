@@ -15,4 +15,8 @@ To run it:
 4. Replace the generated app source with `Sources/SampleApp/SampleApp.swift`.
 5. Run on a physical iPhone or iPad.
 
+The sample UI lets you edit the prompt and max token count before running a test.
+
 The sample uses `SimulatedLlamaRuntime` so dashboards update without bundling llama.cpp or a model file.
+
+If you add `llama.xcframework` and bundle `TinyLlama-1.1B-Chat-v1.0.Q4_0.gguf`, the sample app will switch to `NativeLlamaCppRuntime` automatically through `RuntimeFactory`.
