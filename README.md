@@ -9,12 +9,10 @@ Caliper answers:
 > How does this model behave operationally on real iOS hardware under sustained inference workloads?
 
 ## Screenshots
-```md
-![Sample app screenshot on iPhone](Docs/Screenshots/caliper1.PNG)
-![Sample app screenshot on iPhone](Docs/Screenshots/caliper2.PNG)
-![Sample app screenshot on iPhone](Docs/Screenshots/caliper3.PNG)
 
-```
+<img src="Docs/Screenshots/caliper1.PNG" width=240>
+<img src="Docs/Screenshots/caliper2.PNG" width=240>
+<img src="Docs/Screenshots/caliper3.PNG" width=240>
 
 
 ## Scope
