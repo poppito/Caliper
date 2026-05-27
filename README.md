@@ -109,11 +109,12 @@ Bundle them in the app target you are testing.
 
 ### Add `llama.xcframework`
 
-1. Build or download `llama.xcframework` from upstream llama.cpp.
-2. Drag `llama.xcframework` into your Xcode app project.
-3. Add it to the app target's `Link Binary With Libraries` build phase.
-4. If Xcode treats it as an embedded framework in your setup, add it to `Embed Frameworks` with `Code Sign On Copy`.
-5. Ensure your app target can import `llama` through its bridging header if you are using the native runtime path.
+1. Clone [llama.cpp](https://github.com/ggml-org/llama.cpp) and run `././build-xcframework.sh`
+2. Go to `llama.cpp/build-apple`
+3. Drag `llama.xcframework` into your Xcode app project.
+4. Add it to the app target's `Link Binary With Libraries` build phase.
+5. If Xcode treats it as an embedded framework in your setup, add it to `Embed Frameworks` with `Code Sign On Copy`.
+6. Ensure your app target can import `llama` through its bridging header if you are using the native runtime path.
 
 ### Bundle a local quantized model
 
