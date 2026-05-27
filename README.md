@@ -102,10 +102,31 @@ import Dashboards
 CaliperDashboardView(snapshot: snapshot)
 ```
 
-## llama.cpp Integration
+## Bundling llama.cpp and a GGUF model
+
+Caliper is designed to stay local-first, so the llama.cpp binary and model are intentionally not shipped through the framework packages.
+Bundle them in the app target you are testing.
+
+### Add `llama.xcframework`
+
+1. Clone [llama.cpp](https://github.com/ggml-org/llama.cpp) and run `././build-xcframework.sh`
+2. Go to `llama.cpp/build-apple`
+3. Drag `llama.xcframework` into your Xcode app project.
+4. Add it to the app target's `Link Binary With Libraries` build phase.
+5. If Xcode treats it as an embedded framework in your setup, add it to `Embed Frameworks` with `Code Sign On Copy`.
+6. Ensure your app target can import `llama` through its bridging header if you are using the native runtime path.
+
+### Bundle a local quantized model
+
+1. Choose a GGUF file such as `tinyllama-1.1b-chat-v1.0.Q2_K.gguf` or `TinyLlama-1.1B-Chat-v1.0.Q4_0.gguf`.
+2. Add the file to the app target's `Copy Bundle Resources` build phase.
+3. Make sure the filename you bundle matches the sample app's model configuration.
+4. If you want a different model name, update the sample app configuration in `Apps/SampleApp/SampleCaliperApp/SampleCaliperApp/SampleCaliperAppApp.swift`.
+
+### Runtime behavior
 
 v1 starts with llama.cpp as the intended runtime. The package does not bundle llama.cpp or model binaries. Host apps should provide a concrete token provider or extend `LlamaCppRuntimeAdapter` with their own C/Swift bridge.
-For an actual device test, add `llama.xcframework`, bundle a `.gguf` model named `TinyLlama-1.1B-Chat-v1.0.Q4_0.gguf` or update `RuntimeFactory`, and let the sample app use `NativeLlamaCppRuntime`.
+When `llama.xcframework` is present and the bundled model can be resolved, the sample app uses `NativeLlamaCppRuntime`. Otherwise it falls back to `SimulatedLlamaRuntime`.
 
 The adapter emits:
 

@@ -19,4 +19,10 @@ The sample UI lets you edit the prompt and max token count before running a test
 
 The sample uses `SimulatedLlamaRuntime` so dashboards update without bundling llama.cpp or a model file.
 
-If you add `llama.xcframework` and bundle `TinyLlama-1.1B-Chat-v1.0.Q4_0.gguf`, the sample app will switch to `NativeLlamaCppRuntime` automatically through `RuntimeFactory`.
+To use a real model:
+
+1. Add `llama.xcframework` to the sample app target.
+2. Add your `.gguf` file to `Copy Bundle Resources`.
+3. Make the bundled filename match the model configuration in `SampleCaliperAppApp.swift`.
+
+When both are present, the sample app switches to `NativeLlamaCppRuntime` automatically through `RuntimeFactory`.
