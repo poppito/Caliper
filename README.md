@@ -8,6 +8,15 @@ Caliper answers:
 
 > How does this model behave operationally on real iOS hardware under sustained inference workloads?
 
+## Screenshots
+```md
+![Sample app screenshot on iPhone](Docs/Screenshots/caliper1.PNG)
+![Sample app screenshot on iPhone](Docs/Screenshots/caliper2.PNG)
+![Sample app screenshot on iPhone](Docs/Screenshots/caliper3.PNG)
+
+```
+
+
 ## Scope
 
 Caliper v1 is intentionally small and local-first:
