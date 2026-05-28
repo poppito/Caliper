@@ -25,14 +25,24 @@ public struct LatencyProbe: TelemetryProbe {
                     unit: "s",
                     timestamp: token.timestamp,
                     attributes: ["request.id": token.requestID.uuidString]
+                ),
+                TelemetryPoint(
+                    name: "llm.inference.prefill.duration",
+                    value: token.timestamp.timeIntervalSince(start),
+                    unit: "s",
+                    timestamp: token.timestamp,
+                    attributes: [
+                        "request.id": token.requestID.uuidString,
+                        "llm.phase": "prefill"
+                    ]
                 )
             ]
         case .inferenceCompleted(let result, let timestamp):
             guard let start = startedAt.removeValue(forKey: result.requestID) else {
                 return []
             }
-            firstTokenAt.removeValue(forKey: result.requestID)
-            return [
+            let firstToken = firstTokenAt.removeValue(forKey: result.requestID)
+            var emitted = [
                 TelemetryPoint(
                     name: "llm.inference.duration",
                     value: timestamp.timeIntervalSince(start),
@@ -41,6 +51,23 @@ public struct LatencyProbe: TelemetryProbe {
                     attributes: ["request.id": result.requestID.uuidString]
                 )
             ]
+
+            if let firstToken {
+                emitted.append(
+                    TelemetryPoint(
+                        name: "llm.inference.decode.duration",
+                        value: timestamp.timeIntervalSince(firstToken),
+                        unit: "s",
+                        timestamp: timestamp,
+                        attributes: [
+                            "request.id": result.requestID.uuidString,
+                            "llm.phase": "decode"
+                        ]
+                    )
+                )
+            }
+
+            return emitted
         case .inferenceFailed(let requestID, _, _):
             startedAt.removeValue(forKey: requestID)
             firstTokenAt.removeValue(forKey: requestID)

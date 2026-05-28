@@ -74,7 +74,7 @@ let package = Package(
         ),
         .testTarget(
             name: "CaliperCoreTests",
-            dependencies: ["CaliperCore", "Telemetry", "Validators"],
+            dependencies: ["CaliperCore", "Telemetry", "Validators", "RuntimeAdapters", "Exporters"],
             path: "Tests/CaliperCoreTests"
         )
     ]

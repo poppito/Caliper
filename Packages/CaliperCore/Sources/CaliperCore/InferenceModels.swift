@@ -29,21 +29,33 @@ public struct DeviceMetadata: Codable, Equatable, Sendable {
     public var name: String
     public var systemName: String
     public var systemVersion: String
+    public var hardwareModel: String?
     public var processorCount: Int
+    public var activeProcessorCount: Int
     public var physicalMemoryBytes: UInt64
+    public var thermalState: String?
+    public var isLowPowerModeEnabled: Bool
 
     public init(
         name: String,
         systemName: String,
         systemVersion: String,
+        hardwareModel: String? = nil,
         processorCount: Int = ProcessInfo.processInfo.processorCount,
-        physicalMemoryBytes: UInt64 = ProcessInfo.processInfo.physicalMemory
+        activeProcessorCount: Int = ProcessInfo.processInfo.activeProcessorCount,
+        physicalMemoryBytes: UInt64 = ProcessInfo.processInfo.physicalMemory,
+        thermalState: String? = nil,
+        isLowPowerModeEnabled: Bool = ProcessInfo.processInfo.isLowPowerModeEnabled
     ) {
         self.name = name
         self.systemName = systemName
         self.systemVersion = systemVersion
+        self.hardwareModel = hardwareModel
         self.processorCount = processorCount
+        self.activeProcessorCount = activeProcessorCount
         self.physicalMemoryBytes = physicalMemoryBytes
+        self.thermalState = thermalState
+        self.isLowPowerModeEnabled = isLowPowerModeEnabled
     }
 }
 

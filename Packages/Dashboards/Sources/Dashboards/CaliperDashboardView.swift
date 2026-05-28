@@ -15,6 +15,8 @@ public struct CaliperDashboardView: View {
             LazyVStack(alignment: .leading, spacing: 16) {
                 DashboardHeader(snapshot: snapshot)
                 MetricPanel(title: "Inference Latency", points: points(named: "llm.inference.duration"))
+                MetricPanel(title: "Prefill Duration", points: points(named: "llm.inference.prefill.duration"))
+                MetricPanel(title: "Decode Duration", points: points(named: "llm.inference.decode.duration"))
                 MetricPanel(title: "Time To First Token", points: points(named: "llm.inference.ttft"))
                 MetricPanel(title: "Token Throughput", points: points(named: "llm.tokens.per_second"))
                 MetricPanel(title: "Memory Usage", points: points(named: "process.memory.resident"))
@@ -35,6 +37,50 @@ public struct CaliperDashboardView: View {
     }
 }
 
+public struct RunComparisonView: View {
+    public var comparison: TelemetryRunComparison
+
+    public init(comparison: TelemetryRunComparison) {
+        self.comparison = comparison
+    }
+
+    public var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Run Comparison")
+                    .font(.headline)
+                Text("\(comparison.baseline.name) vs \(comparison.candidate.name)")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+
+            ForEach(comparison.deltas) { delta in
+                HStack(alignment: .firstTextBaseline) {
+                    Text(delta.name)
+                        .font(.subheadline)
+                        .lineLimit(2)
+                    Spacer(minLength: 12)
+                    Text(formatted(delta))
+                        .font(.caption.monospacedDigit())
+                        .foregroundStyle(delta.absoluteChange <= 0 ? .green : .orange)
+                }
+                .padding(.vertical, 4)
+            }
+        }
+        .padding(12)
+        .background(Color.caliperPanelBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+
+    private func formatted(_ delta: MetricDelta) -> String {
+        let change = delta.absoluteChange.formatted(.number.precision(.fractionLength(2)))
+        guard let percent = delta.percentChange else {
+            return "\(change) \(delta.unit)"
+        }
+        return "\(change) \(delta.unit) (\(percent.formatted(.number.precision(.fractionLength(1))))%)"
+    }
+}
+
 private struct DashboardHeader: View {
     var snapshot: TelemetrySnapshot
 
@@ -45,6 +91,11 @@ private struct DashboardHeader: View {
             Text("\(snapshot.points.count) metrics · \(snapshot.spans.count) spans")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
+            if let device = snapshot.device {
+                Text("\(device.name) · \(device.hardwareModel ?? device.systemName) · \(device.systemVersion)")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
