@@ -10,6 +10,7 @@ Caliper answers:
 
 ## Screenshots
 
+
 <img src="Docs/Screenshots/caliper1.PNG" width=240>
 <img src="Docs/Screenshots/caliper2.PNG" width=240>
 <img src="Docs/Screenshots/caliper3.PNG" width=240>
@@ -82,7 +83,44 @@ import RuntimeAdapters
 import Telemetry
 import Workloads
 
-let runtime = SimulatedLlamaRuntime()
+    private let collector = TelemetryCollector()
+    private let session: CaliperSession
+    private let runtime: any InferenceRuntime
+    private let modelURL: URL?
+    private let modelConfiguration = ModelConfiguration(
+        fileName: "tinyllama-1.1b-chat-v1.0.Q2_K.gguf",
+        quantization: "Q2_K"
+    )
+
+    init() {
+        self.modelURL = modelConfiguration.resolvedURL()
+        let runtime = RuntimeFactory.makeRuntime(
+            modelURL: modelURL,
+            modelIdentifier: modelConfiguration.identifier,
+            quantization: modelConfiguration.quantization
+        )
+        self.runtime = runtime
+        self.session = CaliperSession(runtime: runtime)
+        self.runtimeDiagnostics = Self.describeRuntime(runtime, modelURL: modelURL)
+
+        Task {
+            for await latest in await collector.snapshots {
+                await MainActor.run {
+                    self.snapshot = latest
+                }
+            }
+        }
+
+        Task {
+            for await event in await session.events {
+                await collector.ingest(event)
+                await MainActor.run {
+                    self.handle(event: event)
+                }
+            }
+        }
+    }
+
 let session = CaliperSession(runtime: runtime)
 let collector = TelemetryCollector()
 let runner = WorkloadRunner(session: session, collector: collector)
