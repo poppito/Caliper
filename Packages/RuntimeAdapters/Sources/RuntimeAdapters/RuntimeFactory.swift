@@ -5,8 +5,25 @@ public enum RuntimeFactory {
     public static func makeRuntime(
         modelURL: URL?,
         modelIdentifier: String,
-        quantization: String? = nil
+        quantization: String? = nil,
+        preferredRuntime: AppleInferenceRuntimeKind = .automatic
     ) -> any InferenceRuntime {
+        switch preferredRuntime {
+        case .mlx:
+            return MLXRuntimeAdapter(modelIdentifier: modelIdentifier)
+        case .coreML:
+            return CoreMLRuntimeAdapter(modelURL: modelURL)
+        case .foundationModels:
+            return FoundationModelsRuntimeAdapter()
+        case .simulated:
+            return SimulatedLlamaRuntime(
+                modelIdentifier: modelIdentifier,
+                quantization: quantization ?? "unknown"
+            )
+        case .llamaCpp, .automatic:
+            break
+        }
+
         #if canImport(llama)
         if let modelURL {
             return NativeLlamaCppRuntime(

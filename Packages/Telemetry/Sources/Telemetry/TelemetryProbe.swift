@@ -10,12 +10,20 @@ public actor TelemetryCollector {
     private var probes: [any TelemetryProbe]
     private var points: [TelemetryPoint] = []
     private var spans: [UUID: CaliperSpan] = [:]
+    private var run: TelemetryRun
+    private let device: DeviceMetadata?
     private let continuation: AsyncStream<TelemetrySnapshot>.Continuation
 
     public let snapshots: AsyncStream<TelemetrySnapshot>
 
-    public init(probes: [any TelemetryProbe] = TelemetryCollector.defaultProbes()) {
+    public init(
+        probes: [any TelemetryProbe] = TelemetryCollector.defaultProbes(),
+        runName: String = "Live Inference Run",
+        captureDeviceMetadata: Bool = true
+    ) {
         self.probes = probes
+        self.run = TelemetryRun(name: runName)
+        self.device = captureDeviceMetadata ? DeviceMetadata.current() : nil
 
         var continuation: AsyncStream<TelemetrySnapshot>.Continuation!
         self.snapshots = AsyncStream { streamContinuation in
@@ -54,6 +62,8 @@ public actor TelemetryCollector {
         TelemetrySnapshot(
             points: points,
             spans: Array(spans.values).sorted { $0.start < $1.start },
+            device: device,
+            run: run,
             updatedAt: Date()
         )
     }
@@ -79,11 +89,15 @@ public actor TelemetryCollector {
             if let finishReason = result.finishReason {
                 spans[result.requestID]?.attributes["llm.finish_reason"] = finishReason
             }
+            run.endedAt = timestamp
         case .inferenceFailed(let requestID, let message, let timestamp):
             spans[requestID]?.end = timestamp
             spans[requestID]?.attributes["error"] = "true"
             spans[requestID]?.attributes["error.message"] = message
-        case .modelLoadStarted, .modelLoaded:
+            run.endedAt = timestamp
+        case .modelLoaded(let metadata, _):
+            run.model = metadata
+        case .modelLoadStarted:
             break
         }
     }

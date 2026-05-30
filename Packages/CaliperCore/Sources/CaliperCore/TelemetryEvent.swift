@@ -79,15 +79,46 @@ public struct CaliperSpan: Codable, Equatable, Sendable, Identifiable {
 public struct TelemetrySnapshot: Codable, Equatable, Sendable {
     public var points: [TelemetryPoint]
     public var spans: [CaliperSpan]
+    public var device: DeviceMetadata?
+    public var run: TelemetryRun?
     public var updatedAt: Date
 
     public init(
         points: [TelemetryPoint] = [],
         spans: [CaliperSpan] = [],
+        device: DeviceMetadata? = nil,
+        run: TelemetryRun? = nil,
         updatedAt: Date = Date()
     ) {
         self.points = points
         self.spans = spans
+        self.device = device
+        self.run = run
         self.updatedAt = updatedAt
+    }
+}
+
+public struct TelemetryRun: Codable, Equatable, Sendable, Identifiable {
+    public var id: UUID
+    public var name: String
+    public var model: ModelMetadata?
+    public var startedAt: Date
+    public var endedAt: Date?
+    public var attributes: [String: String]
+
+    public init(
+        id: UUID = UUID(),
+        name: String,
+        model: ModelMetadata? = nil,
+        startedAt: Date = Date(),
+        endedAt: Date? = nil,
+        attributes: [String: String] = [:]
+    ) {
+        self.id = id
+        self.name = name
+        self.model = model
+        self.startedAt = startedAt
+        self.endedAt = endedAt
+        self.attributes = attributes
     }
 }
