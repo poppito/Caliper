@@ -112,6 +112,21 @@ final class CaliperCoreTests: XCTestCase {
         XCTAssertEqual(foundationRuntime.runtimeName, "Foundation Models")
     }
 
+    func testMLXRuntimeAdapterCanStreamConfiguredTokens() async throws {
+        let runtime = MLXRuntimeAdapter(modelIdentifier: "test-mlx") { request in
+            request.prompt.split(separator: " ").map { String($0) + " " }
+        }
+        let request = InferenceRequest(prompt: "hello mlx", maxTokens: 2)
+        let stream = try await runtime.run(request)
+        var tokens: [String] = []
+
+        for try await token in stream {
+            tokens.append(token.text)
+        }
+
+        XCTAssertEqual(tokens, ["hello ", "mlx "])
+    }
+
     func testShipReportMarksSlowRunAsNoShip() {
         let snapshot = TelemetrySnapshot(points: [
             TelemetryPoint(name: "llm.inference.ttft", value: 3.5, unit: "s"),
